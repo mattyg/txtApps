@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block import %}
+{% endblock %}
+{% block content %}
+<div class='formpage'>
+	<form action="/register/" method="post">
+		<table>
+			{{ userform.as_table }}
+			{{ profileform.as_table }}
+			{% csrf_token %}
+			<tr><td><input type="submit" value="Submit" /></td></tr>
+		</table>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>{{ title }} | txtApps</title>
+		{% block import %}{% endblock %}
+		<link rel='stylesheet' type='text/css' href='/static/css/base.css' />
+	</head>
+	<body>
+		<div id='all'>
+			<div id='header'>
+				<div id='maintitle'><a href='/'>txtApps</a></div>
+				<div id='right'>
+					{% if user.is_authenticated %}
+						<div id='menu'>
+							<span id='logout'><a href="/logout/">Log Out</a></span>
+							<span id='user'><a href="/my/dashboard">{{ user.username }}</a></span>
+						</div>
+					{% else %}
+						<div id='menu'>
+							<span id='user'>
+								<span id='my'><a id='loginlink' href="/login/">Log In</a></span>
+								<span id='my'><a id='registerlinke' href="/register/">Register</a></span>
+							</span>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div id='content'>
+				{% if messages %}
+					<ul>
+					    {% for message in messages %}
+					    	<li{% if message.tags %} class='{{ message.tags }}' {% endif %}>{{ message }}</li>
+					    {% endfor %}
+					</ul>
+					<iframe 
+					  style="width: 100%; height: 300px; border: none;" 
+					  frameborder="0" allowtransparency="0"
+					  id="zeep_mobile_settings_panel" 
+					  src="https://www.zeepmobile.com/subscription/settings?api_key=6691753d-1808-48df-a793-1206d0271fb4&user_id=[your authenticated user]"
+					>
+					</iframe>
+				{% endif %}
+				{% block content %}{% endblock %}
+				<div class='push'></div>
+			</div>
+		</div>
+		<div id='footer'>
+			<a id='codelink' href='https://github.com/mattyg/txtApps'>Fork txtApps on GitHub</a>
+		</div>
+	</body>
+</html>

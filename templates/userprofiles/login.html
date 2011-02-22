@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block import %}
+{% endblock %}
+{% block content %}
+<div class='formpage'>
+	<form action='/login/' method='post'>
+		<table>
+			<tr><td>{{ form.username.label }}:</td><td>{{ form.username }}</td></tr>
+			<tr><td>{{ form.password.label }}:</td><td>{{ form.password }}</td></tr>
+			{% csrf_token %}
+			<input type="hidden" name="next" value="{{ next }}" />
+			<tr><td><input type='submit' value='Log In' /></td></tr>
+		</table>
+	</form>
+</div>
+{% endblock %}

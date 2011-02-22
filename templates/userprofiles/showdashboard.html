@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block import %}
+<link rel='stylesheet' type='text/css' href='/static/css/userprofiles.css' />
+{% endblock %}
+{% block content %}
+<div class='block'>
+	<span class='title'>My Info<div></div></span>
+	<form action='/my/info/edit/' method='post'>
+		<input type='hidden' name='next' value='/my/dashboard' />
+		<input type='text' name='cellnumber' value='{{ user.profile.cellnumber }}' />
+		{% csrf_token %}
+		<button type='submit'>Submit</button>
+	</form>
+</div>
+<div class='block'>
+	<span class='title'>My Apps <a href='/my/apps/'>[view all]</a><div></div></span>
+	{% for app in apps.all %}
+	<div id='app'>
+		<div id='name'>{{ app.name }} <span id='version'>[{{ app.version }}]</span></div>
+		<div id='description'>{{ app.description }}</div>
+		<div id='commands'>
+			<form id='edit' action='/my/apps/commands/edit/' method='post'>
+				{% if app.id in appcommands %}
+					{% for key,value in appcommands.items %}
+						{% ifequal app.id key %}
+							{% for cmd in value %}
+								<input type='hidden' name='appcommandid' value='{{ cmd.id }}' />
+								<input type='text' name='input' value='{{ cmd.input }}' />
+								-->
+								<input type='text' name='output' value='{{ cmd.output }}' />
+								<input type='hidden' name='appid' value='{{ app.id }}' />
+								{% csrf_token %}
+								<input type='hidden' name='next' value='/my/dashboard/'>
+								<button type='submit'>></button>
+							{% endfor %}
+						{% endifequal %}
+					{% endfor %}
+				{% else %}
+					<input type='text' name='input' value='{{ app.defaultcommand }}' />
+					-->
+					<input type='text' name='output' value='{{ app.defaultcommand }}' />
+					<input type='hidden' name='appid' value='{{ app.id }}' />
+					{% csrf_token %}
+					<input type='hidden' name='next' value='/my/dashboard/'>
+					<button type='submit'>></button>
+				{% endif %}
+			</form>
+			<form id='add' action='/my/apps/commands/add/' method='post'>
+				{% csrf_token %}
+				<input type='hidden' name='appid' value='{{ app.id }}'>
+				<input type='hidden' name='next' value='/my/dashboard/'>
+				<button type='submit'>Add Command</button>
+			</form>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

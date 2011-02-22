@@ -1,0 +1,211 @@
+/*RESET CSS*/
+html,body {
+	margin:0px;
+	width:100%;
+	height:100%;
+	padding:0px;
+	min-height: 100%;
+}
+/*TEMPLATE CLASSES*/
+.formpage {
+	background-color: lightblue;
+	width: 600px;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.formpage table {
+	margin-left: auto;
+	margin-right: auto;
+}
+/*HEADER*/
+#header {
+	width: 100%;
+	background-color: lightgreen;
+}
+
+#header #maintitle {
+	font-size: 55pt;
+	font-weight:bold;
+	padding: 26px;
+	width: 100px;
+}
+#header #maintitle a {
+	color: black;
+	text-decoration: none;
+}
+#header #maintitle a:hover {
+	color: black;
+	border-bottom: solid green 4px;
+	padding-bottom: 10px;
+}
+#header #maintitle a:visited {
+	color: black;
+	text-decoration: none;
+}
+#header #menu {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+#header #user {
+	
+	border-left: solid black 2px;
+	border-bottom: solid black 2px;
+	border-right: solid black 2px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	padding-top: 10px;
+	padding-right: 10px;
+	
+	background-color: lightgrey;
+	font-size: 20pt;
+}
+#header #logout {
+	position: relative;
+	bottom: 15px;
+	
+	border-left: solid black 2px;
+	border-right: solid black 2px;
+	border-bottom: solid black 2px;
+	padding: 3px;
+	
+	background-color:lightgrey;
+	font-size: 12pt;
+}
+#header #logout a {
+	color: black;
+}
+#header #logout a:hover {
+	color: red;
+}
+#header #my a {
+	color: blue;
+}
+#header #my a:hover{
+	color: darkblue;
+}
+#header #email {
+	font-size:  20pt;
+	margin-left: 10px;
+}
+#header #admin {
+	background-color: grey;
+	padding:4px 4px 0px 4px;
+}
+#header #admin a {
+	color:white;
+}
+#header #admin a:hover {
+	color: lightblue;
+}
+
+/*FOOTER */
+#clear {
+	clear: both;
+}
+#footer {
+	margin-top: 30px;
+	background-color: lightblue;
+	height: 40px;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	z-index: 0;
+}
+#footer a#codelink {
+	position: relative;
+	left: 30px;
+	top: 10px;
+	
+	color: green;
+	font-size: 1.2em;
+	padding: 2px;
+	
+}
+#footer a#codelink:hover {
+	border: dashed black 1px;
+}
+
+/*CONTENT*/
+#content {
+	padding-left: 100px;
+	padding-right: 100px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+		margin-bottom: 50px;
+		background-color:white;
+
+}
+
+#content #pagehead {
+	font-size: 30pt;
+	text-align:center;
+	border-bottom: solid black 2px;
+	padding-bottom: 10px;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+}
+#content .block {
+	background-color: lightgrey;
+	width: 600px;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+#content .block .title{
+	font-size: 1.4em;
+	border-bottom: solid black 2px;
+}
+/* spacer for title */
+#content .block .title div{
+	padding-bottom: 20px;
+}
+
+
+/*Messages*/
+#messages{
+padding: 0;
+margin: 0;
+font-size: 14px;
+font-weight: bold;
+margin-top: 4px;
+clear: all;
+white-space: nowrap;
+}
+.message {
+padding: 4px;
+width: 100%;
+color: #ffffff;
+background-color: #aaa9a6;
+float: left;
+margin-bottom: 3px;
+}
+.warning {
+padding: 4px;
+width: 100%;
+color: #ffffff;
+background-color: #ff9900;
+float: left;
+margin-bottom: 3px;
+}
+.success {
+padding: 4px;
+width: 100%;
+color: #ffffff;
+background-color: #009000;
+float: left;
+margin-bottom: 3px;
+}
+.error {
+padding: 4px;
+width: 100%;
+color: #ffffff;
+background-color: #900000;
+float: left;
+margin-bottom: 3px;
+}

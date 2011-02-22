@@ -1,0 +1,29 @@
+/* App display */
+
+div#app {
+	background-color: whitesmoke;
+	margin-bottom: 10px;
+	padding: 4px 4px 6px 4px;
+}
+
+div#app div#name {
+	font-size: 1.1em;
+}
+div#app div#name span#version{
+	font-size: 0.7em;
+}
+
+div#app div#commands input {
+	width: 260px;
+}
+div#app div#commands form#edit button {
+	float: right;
+}
+div#app div#commands form#add button {
+	background-color: transparent;
+	padding: 0px;
+	border: 0px;
+}
+div#app div#commands form#add button:hover {
+	border-bottom: solid black 1px;
+}
