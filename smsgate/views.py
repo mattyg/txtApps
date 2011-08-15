@@ -1,21 +1,41 @@
 # settings
 from django.conf import settings
-
-# temporary for TESTING
+# template
 from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import HttpResponseRedirect,HttpResponse
 
-# SMSGATE_GATEWAY = 'smsgate.gateways.twillio'
+# SMS GATEWAY
+import sys
+gateway = __import__(settings.SMS_GATEWAY)
+gateway = sys.modules[settings.SMS_GATEWAY]
+
+# parse apps, run apps
+from smsgate.tasks import parsecommand,runapp
+from userapps.models import App
+from userprofiles.models import Profile
+
 
 # smsgate incoming sms
-def incoming(request):
-	#settings.SMSGATE_GATEWAY.incoming(request) # reads in sms message (decifered through gateway functions)
-	# calls txtapp with text & user
-	# txapp adds task to celery to read in, get response
-	# txtapp sends to outgoing
-	print request
+def incoming(request):	
+	# get TEXT & CELL# from gateway request
+	textin,cellnumber = gateway.incoming(request)
+
+	try:
+		# get COMMAND+ARGS from text & cell#
+		appid,userprofileid,arguements = parsecommand(cellnumber,textin)
+		# RUN command
+		textout = runapp(appid,userprofileid,arguements)
+	except App.DoesNotExist:
+		textout = "App not found."
+	except Profile.DoesNotExist:
+		textout = "To join txtApps respond with 'txtapps join username password'"
+	
+	# make RESPONSE from command results
+	if len(textout) > 0:
+		data = {}
+		data['textout'] = textout
+		return render_to_response('smsgate/outgoing.xml',data,mimetype='text/xml')
 
 # smsgate outgoing sms
-def outgoing(request):
-	pass
+def outgoing(textmessage):
+	print "Responding...",request
+	gateway.outgoing(request)

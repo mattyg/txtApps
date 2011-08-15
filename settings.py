@@ -1,10 +1,13 @@
+
 # Django settings for txtApps_django project.
+
+MAIN_PATH = '/home/gabrenya/www/txtApps_django/'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+     ('Admin', 'Admin@admin.com'),
 )
 
 MANAGERS = ADMINS
@@ -45,7 +48,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/matt/CodingProjects/txtApps_django/media/'
+MEDIA_ROOT = MAIN_PATH+'static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -73,7 +76,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-	'djangologging.middleware.LoggingMiddleware',
 )
 
 ROOT_URLCONF = 'txtApps_django.urls'
@@ -82,7 +84,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'/Users/matt/CodingProjects/txtApps_django/templates'
+	MAIN_PATH + 'templates'
 )
 
 INSTALLED_APPS = (
@@ -98,11 +100,40 @@ INSTALLED_APPS = (
 	'userprofiles',
 	'userapps',
 	'smsgate',
-	'django_evolution',
+	'django_extensions',
+#	'djcelery',
+#	'ghettoq',
+#	'kombu',
 )
+'''
+# CELERY SETTINGS #
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_USER = "name"
+BROKER_PASSWORD = "whooop"
+BROKER_VHOST = "broker"
+KOMBU_BACKEND = "ghettoq.taproot.Database"
+
+import djcelery
+djcelery.setup_loader()
+'''
 
 AUTH_PROFILE_MODULE = "userprofiles.Profile"
 LOGIN_URL = "/login/"
 
 # smsgate settings #
-SMSGATE_GATEWAY = 'smsgate.gateways.twillio'
+SMS_GATEWAY = 'smsgate.gateways.twillio'
+
+# APPS directory #
+APPS_PATH = MAIN_PATH+'apps/'
+APPS_LOG = MAIN_PATH+'apps_log.txt'
+
+
+'''import logging
+logging.basicConfig(
+	level = logging.DEBUG,
+	format = '%(asctime)s %(levelname)s %(message)s',
+	filename = '/tmp/django.log',
+	filemode = 'w')'''
+
+APPEND_SLASH = True

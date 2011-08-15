@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<app name='ShortWeather'>
+	<version>0.1</version>
+	<category>Weather</category>
+	<description>This app will get the weather with your area code and shitThis app will get the weather with your area code and shitThis app will get the weather with your area code and shit</description>
+	<defaultcommand>shortweather</defaultcommand>
+	<runfile>ShortWeather-0.1/run.php</runfile>
+	<url>http://google.com</url>
+</app>

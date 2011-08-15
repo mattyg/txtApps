@@ -18,13 +18,22 @@ urlpatterns = patterns('',
 	# my pages
 	(r'^my/dashboard/$', 'userprofiles.views.showdashboard'),
 	(r'^my/apps/$', 'userapps.views.showuserapps'),
+
+	# admin pages
+	(r'^super/dashboard/$', 'userprofiles.views.showadmindashboard'),
 	
 	# my edit pages
 	#apps
 	(r'^my/apps/commands/edit/$','userapps.views.edituserapps'),
 	(r'^my/apps/commands/add/$','userapps.views.addusercommand'),
+	(r'^my/apps/add/$','userapps.views.adduserapp'),
+	(r'^my/apps/(?P<appid>\d*)/$', 'userapps.views.showuserapp'),
 	#info
 	(r'^my/info/edit/$','userprofiles.views.editcellnumber'),
+
+	# browse all apps
+	(r'^all/apps/$', 'userapps.views.showallapps'),
+	(r'^all/apps/(?P<sortby>\w*)/(?P<sortorder>\w*)/(?P<page>\d+)/$', 'userapps.views.showallapps'),
 	
 	# login/logout
 	(r'^login/$', 'userprofiles.views.dologin'),
@@ -32,12 +41,11 @@ urlpatterns = patterns('',
 	# register
 	(r'^register/$', 'userprofiles.views.register'),
 	
-	# main page redirect
-	(r'^$', 'userprofiles.views.main'),
-	
 	# sms gateway
 	(r'^smsgate/incoming/$', 'smsgate.views.incoming'),
-	(r'^smsgate/outgoing/$', 'smsgate.views.outgoing'),
+	
+	# main page redirect
+	(r'^$', 'userprofiles.views.main'),
 )
 import settings
 if settings.DEBUG:

@@ -1,12 +1,12 @@
 from django import forms
-from userapps.models import UserCommand
+from userapps.models import App,AppCommand
 
 class InputForm(forms.ModelForm): 
 	class Meta:
-		model = UserCommand
+		model = AppCommand
 		fields = ['input']
 
 class OutputForm(forms.ModelForm):
 	class Meta:
-		model = UserCommand
+		model = AppCommand
 		fields = ['output']

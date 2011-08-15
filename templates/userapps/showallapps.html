@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block import %}
+<link rel='stylesheet' type='text/css' href='/static/css/userprofiles.css' />
+{% endblock %}
+{% block content %}
+<table>
+	<tr>
+		<td></td><td>Name</td><td>Author</td><td>Category</td><td>Description</td>
+	</tr>
+	{% for app in apps.all %}
+		<tr>
+			{% if user.is_authenticated %}
+				{% if app in user.profile.apps.all %}
+					<td>
+					</td>
+					<td><a href="/my/apps/{{ app.id }}/">{{ app.name }}</a></td>
+				{% else %}
+					<td>
+					<form action="/my/apps/add/" method="post">
+						{% csrf_token %}
+						<input type="hidden" name="next" value="/all/apps/" />
+						<input type="hidden" name="appid" value="{{ app.id }}" />
+						<input type="submit" value="Use App" />
+					</form>
+					</td>
+					<td>{{ app.name }}</td>
+				{% endif %}
+			{% endif %}
+			<td>{{ app.author }}</td>
+			<td>{{ app.category }}</td>
+			<td>{{ app.description }}</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}

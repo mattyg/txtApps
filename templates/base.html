@@ -33,13 +33,6 @@
 					    	<li{% if message.tags %} class='{{ message.tags }}' {% endif %}>{{ message }}</li>
 					    {% endfor %}
 					</ul>
-					<iframe 
-					  style="width: 100%; height: 300px; border: none;" 
-					  frameborder="0" allowtransparency="0"
-					  id="zeep_mobile_settings_panel" 
-					  src="https://www.zeepmobile.com/subscription/settings?api_key=6691753d-1808-48df-a793-1206d0271fb4&user_id=[your authenticated user]"
-					>
-					</iframe>
 				{% endif %}
 				{% block content %}{% endblock %}
 				<div class='push'></div>

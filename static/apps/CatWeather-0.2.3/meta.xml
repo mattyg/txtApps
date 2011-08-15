@@ -1,0 +1,9 @@
+{	name : "CatWeather",
+	version : "0.2.3",
+	category : "Weather",
+	description : 'his app will get the weather with your area code and shitThis app will get the weather with your area code and shitThis app will get the weather with your area code and shit',
+	url : "http://google.com",
+
+	defaultcommand : 'catweather',
+	file : "CatWeather-0.2.3/run.php",
+}

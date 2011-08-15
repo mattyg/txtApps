@@ -14,6 +14,10 @@ from django.contrib.auth.models import User
 #forms
 from userprofiles.forms import UserForm,ProfileForm,UserLoginForm
 from userapps.forms import InputForm,OutputForm
+#decorators
+from userapps.decorators import superuser_only
+#tasks
+from userapps.tasks import refreshapps
 
 def register(request):
 	if request.method == 'POST': # form data submitted
@@ -73,12 +77,16 @@ def dologout(request):
 
 @login_required
 def showdashboard(request):	
-	apps = request.user.profile.apps.all()
-	appcommands = {}
-	for app in apps:
-		commands = request.user.profile.appcommands.all().filter(app__id=app.id)
-		if commands:
-			appcommands[app.id] = commands
+	if request.user.profile.apps is not None:
+		apps = request.user.profile.apps.all()
+		appcommands = {}
+		for app in apps:
+			commands = request.user.profile.appcommands.all().filter(app__id=app.id)
+			if commands:
+				appcommands[app.id] = commands
+	else:
+		apps = []
+		appcommands = {}
 	data = RequestContext(request,{
 		'title':request.user.username,
 		'apps':apps,
@@ -106,3 +114,17 @@ def editcellnumber(request):
 		userprofile.save()
 		messages.success(request,'Your cell number has been changed.')
 	return HttpResponseRedirect(request.POST['next'])
+
+
+@superuser_only
+def showadmindashboard(request):
+	if request.method == 'POST':
+		if request.POST.__contains__('refreshappsnow') and request.POST['refreshappsnow'] == "1":
+			newapps = refreshapps()
+			messages.success(request,'Apps Directory Refreshed. %s new apps added.' %(newapps))
+		#if request.POST.__contains__('refreshappsinterval'):
+		#	pass
+		return HttpResponseRedirect(request.POST['next'])
+	else:
+		data = RequestContext(request,{'title':'Admin Dashboard'})
+		return render_to_response('userprofiles/showadmindashboard.html',data)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block import %}
+<link rel='stylesheet' type='text/css' href='/static/css/userprofiles.css' />
+{% endblock %}
+{% block content %}
+<div class='block'>
+	<span class='title'>Control Dashboard<div></div></span>
+	<form action='.' method='post'>
+		{% csrf_token %}
+		<input type='hidden' name='refreshappsnow' value='1' />
+		<input type='hidden' name='next' value='/super/dashboard' />
+		<button type='submit'>Reload Apps Directory</button>
+	</form>
+</div>
+{% endblock %}
