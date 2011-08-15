@@ -1,0 +1,1 @@
+['/home/gabrenya/www/txtApps_django/apps/gcalcli/run.py', 'quick', '"wake', 'and', 'bake', 'tomorrow', '10am"', 'userconfig=/home/gabrenya/www/txtApps_django/tmp/tmpIXINMi']
